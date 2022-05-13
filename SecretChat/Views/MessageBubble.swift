@@ -12,14 +12,14 @@ struct MessageBubble: View {
     @State private var displayTime = false
     var message: Message
     var body: some View {
-        VStack(alignment: message.sender ? .leading : .trailing) {
+        VStack(alignment: message.sender ? .trailing : .leading) {
             HStack {
                 Text(message.text)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 20)
                         .foregroundColor(message.sender ? .green : .cyan))
             }
-            .frame(maxWidth: 300, alignment: message.sender ? .leading : .trailing)
+            .frame(maxWidth: 300, alignment: message.sender ? .trailing : .leading)
             .onTapGesture {
                 displayTime.toggle()
             }
@@ -28,11 +28,11 @@ struct MessageBubble: View {
                 Text("\(message.timeStamp.formatted(.dateTime.hour().minute()))")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                    .padding(message.sender ? .leading : .trailing, 10)
+                    .padding(message.sender ? .trailing : .leading, 10)
             }
         }
-        .frame(maxWidth: .infinity, alignment: message.sender ? .leading : .trailing)
-        .padding(message.sender ? .leading : .trailing)
+        .frame(maxWidth: .infinity, alignment: message.sender ? .trailing : .leading)
+        .padding(message.sender ? .trailing : .leading)
         .padding(.horizontal, 10)
     }
 }

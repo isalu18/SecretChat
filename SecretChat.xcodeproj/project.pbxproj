@@ -16,6 +16,7 @@
 		5882572C282B4271006F22FD /* SecretChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882572B282B4271006F22FD /* SecretChatUITestsLaunchTests.swift */; };
 		5882573A282B4A97006F22FD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58825739282B4A97006F22FD /* Message.swift */; };
 		5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882573E282B4BA7006F22FD /* MessageBubble.swift */; };
+		58CD1237282DF6570097504C /* MessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CD1236282DF6570097504C /* MessageField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		5882572B282B4271006F22FD /* SecretChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		58825739282B4A97006F22FD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		5882573E282B4BA7006F22FD /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		58CD1236282DF6570097504C /* MessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				58825710282B426E006F22FD /* ContentView.swift */,
 				5882573E282B4BA7006F22FD /* MessageBubble.swift */,
+				58CD1236282DF6570097504C /* MessageField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			files = (
 				5882573A282B4A97006F22FD /* Message.swift in Sources */,
 				58825711282B426E006F22FD /* ContentView.swift in Sources */,
+				58CD1237282DF6570097504C /* MessageField.swift in Sources */,
 				5882570F282B426E006F22FD /* SecretChatApp.swift in Sources */,
 				5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */,
 			);
