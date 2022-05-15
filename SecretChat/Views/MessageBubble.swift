@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MessageBubble: View {
     
-    @State private var displayTime = false
+    @State private var displayTimeAndDecrypt = false
     var message: Message
     var body: some View {
         VStack(alignment: message.sender ? .trailing : .leading) {
@@ -21,14 +21,11 @@ struct MessageBubble: View {
             }
             .frame(maxWidth: 300, alignment: message.sender ? .trailing : .leading)
             .onTapGesture {
-                displayTime.toggle()
+                displayTimeAndDecrypt.toggle()
             }
             
-            if displayTime {
-                Text("\(message.timeStamp.formatted(.dateTime.hour().minute()))")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(message.sender ? .trailing : .leading, 10)
+            if displayTimeAndDecrypt {
+                MessageDetails(message: message)
             }
         }
         .frame(maxWidth: .infinity, alignment: message.sender ? .trailing : .leading)
@@ -37,8 +34,47 @@ struct MessageBubble: View {
     }
 }
 
+struct MessageDetails: View {
+    var message: Message
+    var body: some View {
+        HStack(spacing: 20) {
+            if message.sender {
+                Button("Decrypt") {
+                    
+                }
+                .padding(5)
+                .font(.caption)
+                .background(.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .frame(alignment: .center)
+                Text("\(message.timeStamp.formatted(.dateTime.hour().minute()))")
+                    .frame(alignment: message.sender ? .trailing : .leading)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(message.sender ? .trailing : .leading, 10)
+            } else {
+                Text("\(message.timeStamp.formatted(.dateTime.hour().minute()))")
+                    .frame(alignment: message.sender ? .trailing : .leading)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(message.sender ? .trailing : .leading, 10)
+                Button("Decrypt") {
+                    
+                }
+                .padding(5)
+                .font(.caption)
+                .background(.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .frame(alignment: .center)
+            }
+        }
+    }
+}
+
 struct MessageBubble_Previews: PreviewProvider {
     static var previews: some View {
-        MessageBubble(message: Message(id: "12345", text: "Hello World from the other side dasdawdawdasdawdadwdadawdadwdwadawddawdadadawdaswd", sender: true, timeStamp: Date()))
+        MessageBubble(message: Message(id: "12345", text: "Hello World from the other side dasdawdawdasdawdadwdadawdadwdwadawddawdadadawdaswd", sender: false, timeStamp: Date()))
     }
 }

@@ -42,7 +42,6 @@ struct TitleView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
             
-           
             VStack(alignment: .leading) {
                 Text("Unknown User")
                     .font(.title)
