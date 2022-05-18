@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct MessageField: View {
+    
     @State private var message = ""
+    @FocusState private var messageIsFocused: Bool
+    
     var body: some View {
         HStack {
             CustomMessageField(text: $message, placerholder: Text("What are you thinking?"))
+                .focused($messageIsFocused)
+                .submitLabel(.send)
             Button {
+                print(message)
                 message = ""
+                messageIsFocused = false
             } label: {
                 Image(systemName: "paperplane.fill")
                     .foregroundColor(.white)
@@ -38,7 +45,7 @@ struct CustomMessageField: View {
     @Binding var text: String
     var placerholder: Text
     var editingChanged: (Bool) -> () = { _ in }
-    var commit: () -> () = {}
+//    var commit: () -> () = {}
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -46,7 +53,10 @@ struct CustomMessageField: View {
                 placerholder
                     .opacity(0.5)
             }
-            TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+            TextField("", text: $text, onEditingChanged: editingChanged) {
+                print(text)
+                text = ""
+            }
         }
     }
 }

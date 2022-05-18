@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
             Color.cyan
                 .ignoresSafeArea()
+            
             VStack {
                 HStack {
                     Text("Settings")
@@ -36,8 +38,31 @@ struct SettingsView: View {
                 .foregroundColor(.black)
                 
                 ScrollView {
-                    Text("Hello World")
-                        .padding()
+                    VStack {
+                        Button {
+                            
+                        } label: {
+                            Text("Generate new key pairs")
+                                .foregroundColor(.black)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(UIColor.systemGray2))
+                        }
+                        
+                        Button {
+                            
+                        } label: {
+                            Text("Generate new public keys for friends")
+                                .foregroundColor(.black)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(UIColor.systemGray2))
+                        }
+                    }
                 }
             }
             
@@ -49,8 +74,4 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
     }
-}
-
-extension UIScreen{
-   static let screenWidth = UIScreen.main.bounds.size.width
 }
