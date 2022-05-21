@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TitleView: View {
     @State var showSettingsScreen = false
+    @Binding var isSafeMode: Bool
     
     var body: some View {
         HStack(spacing: 20) {
@@ -21,9 +22,15 @@ struct TitleView: View {
                 Text("Unknown User")
                     .font(.title)
                 .fontWeight(.bold)
-                Text("online")
-                    .foregroundColor(.secondary)
-                    .font(.caption)
+                HStack {
+                    Text("online")
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                    Text(isSafeMode ? "Safe Mode" : "Unsafe Mode")
+                        .foregroundColor(isSafeMode ? .indigo : .red)
+                        .font(.caption)
+                        .fontWeight(.bold)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -48,6 +55,6 @@ struct TitleView: View {
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView()
+        TitleView(isSafeMode: .constant(false))
     }
 }
