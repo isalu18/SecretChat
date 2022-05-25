@@ -1,5 +1,5 @@
 //
-//  MessageField.swift
+//  MessageFieldView.swift
 //  SecretChat
 //
 //  Created by Isaac Sanchez on 12/05/22.
@@ -7,19 +7,22 @@
 
 import SwiftUI
 
-struct MessageField: View {
-    
+struct MessageFieldView: View {
     @State private var message = ""
     @FocusState private var messageIsFocused: Bool
+    @Binding var messages: [String]
     
     var body: some View {
         HStack {
-            CustomMessageField(text: $message, placerholder: Text("What are you thinking?"))
+            //            CustomMessageField(text: $message, placerholder: Text("What are you thinking?"))
+            TextField("Type something", text: $message)
                 .focused($messageIsFocused)
                 .submitLabel(.send)
+                .onSubmit {
+                    sendMessage(messages: messages, message: message)
+                }
             Button {
-                print(message)
-                message = ""
+                sendMessage(messages: messages, message: message)
                 messageIsFocused = false
             } label: {
                 Image(systemName: "paperplane.fill")
@@ -33,30 +36,18 @@ struct MessageField: View {
         .background(Color(UIColor.systemGray6))
         .cornerRadius(10)
     }
+    
+    func sendMessage(messages: [String], message: String) {
+        withAnimation {
+            self.messages.append(message)
+            self.message = ""
+        }
+    }
 }
 
 struct MessageField_Previews: PreviewProvider {
     static var previews: some View {
-        MessageField()
+        MessageFieldView(messages: .constant(["Hola"]))
     }
 }
 
-struct CustomMessageField: View {
-    @Binding var text: String
-    var placerholder: Text
-    var editingChanged: (Bool) -> () = { _ in }
-//    var commit: () -> () = {}
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            if text.isEmpty {
-                placerholder
-                    .opacity(0.5)
-            }
-            TextField("", text: $text, onEditingChanged: editingChanged) {
-                print(text)
-                text = ""
-            }
-        }
-    }
-}

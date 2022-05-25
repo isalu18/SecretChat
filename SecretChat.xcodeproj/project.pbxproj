@@ -18,7 +18,7 @@
 		5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882573E282B4BA7006F22FD /* MessageBubble.swift */; };
 		58BEF82E28334AE000DA1564 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEF82D28334AE000DA1564 /* SettingsView.swift */; };
 		58BEF83028334AF600DA1564 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEF82F28334AF600DA1564 /* TitleView.swift */; };
-		58CD1237282DF6570097504C /* MessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CD1236282DF6570097504C /* MessageField.swift */; };
+		58CD1237282DF6570097504C /* MessageFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CD1236282DF6570097504C /* MessageFieldView.swift */; };
 		58F1FADE2835E90B009E7AA5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1FADD2835E90B009E7AA5 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,7 @@
 		5882573E282B4BA7006F22FD /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		58BEF82D28334AE000DA1564 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		58BEF82F28334AF600DA1564 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		58CD1236282DF6570097504C /* MessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageField.swift; sourceTree = "<group>"; };
+		58CD1236282DF6570097504C /* MessageFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFieldView.swift; sourceTree = "<group>"; };
 		58F1FADD2835E90B009E7AA5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +154,7 @@
 			children = (
 				58825710282B426E006F22FD /* ContentView.swift */,
 				5882573E282B4BA7006F22FD /* MessageBubble.swift */,
-				58CD1236282DF6570097504C /* MessageField.swift */,
+				58CD1236282DF6570097504C /* MessageFieldView.swift */,
 				58BEF82D28334AE000DA1564 /* SettingsView.swift */,
 				58BEF82F28334AF600DA1564 /* TitleView.swift */,
 			);
@@ -301,7 +301,7 @@
 			files = (
 				5882573A282B4A97006F22FD /* Message.swift in Sources */,
 				58825711282B426E006F22FD /* ContentView.swift in Sources */,
-				58CD1237282DF6570097504C /* MessageField.swift in Sources */,
+				58CD1237282DF6570097504C /* MessageFieldView.swift in Sources */,
 				58F1FADE2835E90B009E7AA5 /* Extensions.swift in Sources */,
 				58BEF83028334AF600DA1564 /* TitleView.swift in Sources */,
 				58BEF82E28334AE000DA1564 /* SettingsView.swift in Sources */,

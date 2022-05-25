@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var showAlert = true
     @State private var isSafeMode: Bool = false
     
-    var messages = ["Hello", "How are you?", "Nice to meet you", "Regards", "I'm building a SwiftUI App from scratch"]
+    @State private var messages = ["Hello", "How are you?", "Nice to meet you", "Regards", "I'm building a SwiftUI App from scratch"]
     var body: some View {
         VStack {
             VStack {
@@ -28,7 +28,8 @@ struct ContentView: View {
             .onTapGesture {
                 hideKeyboard()
             }
-            MessageField()
+            MessageFieldView(messages: $messages)
+        
         }
         .alert("Would you like to enable Safe Mode?", isPresented: $showAlert, actions: {
             
