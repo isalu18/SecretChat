@@ -39,13 +39,16 @@ struct SettingsView: View {
                 
                 ScrollView {
                     VStack {
+                        Text("Keys Settings")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding()
                         Button {
                             
                         } label: {
                             Text("Generate new key pairs")
                                 .foregroundColor(.black)
                                 .font(.title3)
-                                .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color(UIColor.systemGray2))
@@ -57,7 +60,37 @@ struct SettingsView: View {
                             Text("Generate new public keys for friends")
                                 .foregroundColor(.black)
                                 .font(.title3)
-                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(UIColor.systemGray2))
+                        }
+                    }
+                    
+                    Divider()
+                    
+                    VStack {
+                        Text("Session Settings")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding()
+                        
+                        Button {
+                            
+                        } label: {
+                            Text("Host Session")
+                                .foregroundColor(.black)
+                                .font(.title3)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(UIColor.systemGray2))
+                        }
+                        
+                        Button {
+                            
+                        } label: {
+                            Text("Join Session")
+                                .foregroundColor(.black)
+                                .font(.title3)
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color(UIColor.systemGray2))

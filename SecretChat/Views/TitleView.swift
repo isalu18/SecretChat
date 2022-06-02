@@ -42,7 +42,6 @@ struct TitleView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 25, height: 25)
                     .foregroundColor(.black)
-                
             }
             .sheet(isPresented: $showSettingsScreen) {
                 SettingsView()

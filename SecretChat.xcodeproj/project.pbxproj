@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5849D13F28485CF400940596 /* ConnectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5849D13E28485CF400940596 /* ConnectionViewModel.swift */; };
 		5882570F282B426E006F22FD /* SecretChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882570E282B426E006F22FD /* SecretChatApp.swift */; };
 		58825711282B426E006F22FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58825710282B426E006F22FD /* ContentView.swift */; };
 		58825713282B4271006F22FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58825712282B4271006F22FD /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5849D13E28485CF400940596 /* ConnectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewModel.swift; sourceTree = "<group>"; };
 		5882570B282B426E006F22FD /* SecretChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecretChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5882570E282B426E006F22FD /* SecretChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretChatApp.swift; sourceTree = "<group>"; };
 		58825710282B426E006F22FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				58825739282B4A97006F22FD /* Message.swift */,
+				5849D13E28485CF400940596 /* ConnectionViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				58BEF83028334AF600DA1564 /* TitleView.swift in Sources */,
 				58BEF82E28334AE000DA1564 /* SettingsView.swift in Sources */,
 				5882570F282B426E006F22FD /* SecretChatApp.swift in Sources */,
+				5849D13F28485CF400940596 /* ConnectionViewModel.swift in Sources */,
 				5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
