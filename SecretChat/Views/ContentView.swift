@@ -11,12 +11,14 @@ struct ContentView: View {
     
     @State private var showAlert = true
     @State private var isSafeMode: Bool = false
-    
     @State private var messages = ["Hello", "How are you?", "Nice to meet you", "Regards", "I'm building a SwiftUI App from scratch"]
+    
+    @ObservedObject var connection: ConnectionViewModel
+    
     var body: some View {
         VStack {
             VStack {
-                TitleView(isSafeMode: $isSafeMode)
+                TitleView(isSafeMode: $isSafeMode, connection: connection)
                 
                 ScrollView {
                     ForEach(messages, id: \.self) { message in
@@ -47,6 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(connection: ConnectionViewModel())
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct TitleView: View {
     @State var showSettingsScreen = false
     @Binding var isSafeMode: Bool
+    @ObservedObject var connection: ConnectionViewModel
     
     var body: some View {
         HStack(spacing: 20) {
@@ -44,7 +45,7 @@ struct TitleView: View {
                     .foregroundColor(.black)
             }
             .sheet(isPresented: $showSettingsScreen) {
-                SettingsView()
+                SettingsView(connection: connection)
             }
         }
         .padding()
@@ -54,6 +55,6 @@ struct TitleView: View {
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleView(isSafeMode: .constant(false))
+        TitleView(isSafeMode: .constant(false), connection: ConnectionViewModel())
     }
 }

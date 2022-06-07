@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SettingsView: View {
-    
+struct SettingsView: View {    
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var connection: ConnectionViewModel
     
     var body: some View {
         ZStack {
@@ -75,9 +75,11 @@ struct SettingsView: View {
                             .padding()
                         
                         Button {
+                            connection.advertise()
+                            presentationMode.wrappedValue.dismiss()
                             
                         } label: {
-                            Text("Host Session")
+                            Text("Create Session")
                                 .foregroundColor(.black)
                                 .font(.title3)
                                 .frame(maxWidth: .infinity)
@@ -86,7 +88,7 @@ struct SettingsView: View {
                         }
                         
                         Button {
-                            
+                            connection.invite()
                         } label: {
                             Text("Join Session")
                                 .foregroundColor(.black)
@@ -105,6 +107,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(connection: ConnectionViewModel())
     }
 }

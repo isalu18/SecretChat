@@ -8,103 +8,105 @@
 import SwiftUI
 import MultipeerConnectivity
 
-class ConnectionViewModel: MCSessionDelegate, MCBrowserViewControllerDelegate {
+class ConnectionViewModel: NSObject, ObservableObject {
+
+    var peerID: MCPeerID
+    var mcSession: MCSession
+    var hostID: MCPeerID?
+//    var mcAdvertiserAssitant: MCAdvertiserAssistant!
+    var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser?
     
-    var peerID: MCPeerID!
-    var mcSession: MCSession!
-    var mcAdvertiserAssitant: MCAdvertiserAssistant!
+    override init() {
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        super.init()
+        mcSession.delegate = self
+    }
     
-//    func setUpConnectivity() {
-//        peerID = MCPeerID(displayName: UIDevice.current.name)
-//        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+    func advertise() {
+        mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "chatting")
+        mcNearbyServiceAdvertiser?.delegate = self
+        mcNearbyServiceAdvertiser?.startAdvertisingPeer()
+    }
+    
+    func invite() {
+        let browser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
+        browser.delegate = self
+        DispatchQueue.main.async {
+            let screen = UIApplication.shared.keyWindow
+            screen?.rootViewController?.presentedViewController?.present(browser, animated: true, completion: nil)
+        }
+    }
+}
+
+extension ConnectionViewModel: MCSessionDelegate {
+    
+//    func hostSession() {
+////        mcAdvertiserAssitant = MCAdvertiserAssistant(serviceType: "chatting", discoveryInfo: nil, session: mcSession)
+////        mcAdvertiserAssitant.start()
+//    }
+//
+//    func joinSession() {
+////        let mcBrowser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
 //    }
     
-    func hostSession() {
-        mcAdvertiserAssitant = MCAdvertiserAssistant(serviceType: "chatting", discoveryInfo: nil, session: mcSession)
-        mcAdvertiserAssitant.start()
-    }
-    
-    func joinSession() {
-        let mcBrowser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
-    }
-    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        <#code#>
+        switch state {
+        case .connected:
+            print("\(peerID), state: connected")
+        case .connecting:
+            print("\(peerID), state: connecting")
+        case .notConnected:
+            print("\(peerID), state: not connected")
+        default:
+            print("\(peerID), state: unknown")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        <#code#>
-    }
-    
-    func isEqual(_ object: Any?) -> Bool {
-        <#code#>
-    }
-    
-    var hash: Int {
-        <#code#>
-    }
-    
-    var superclass: AnyClass? {
-        <#code#>
-    }
-    
-    func `self`() -> Self {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func isProxy() -> Bool {
-        <#code#>
-    }
-    
-    func isKind(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func isMember(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func conforms(to aProtocol: Protocol) -> Bool {
-        <#code#>
-    }
-    
-    func responds(to aSelector: Selector!) -> Bool {
-        <#code#>
-    }
-    
-    var description: String {
-        <#code#>
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         
     }
     
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+}
+
+extension ConnectionViewModel: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        invitationHandler(true, mcSession)
+    }
+}
+
+extension ConnectionViewModel: MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(animated: true)
+    }
+    
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        <#code#>
+        browserViewController.dismiss(animated: true)
+    }
+}
+
+extension UIApplication {
+    var keyWindow: UIWindow? {
+        // Get connected scenes
+        return UIApplication.shared.connectedScenes
+            // Keep only active scenes, onscreen and visible to the user
+            .filter { $0.activationState == .foregroundActive }
+            // Keep only the first `UIWindowScene`
+            .first(where: { $0 is UIWindowScene })
+            // Get its associated windows
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            // Finally, keep only the key window
+            .first(where: \.isKeyWindow)
     }
 }

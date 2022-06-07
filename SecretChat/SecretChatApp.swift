@@ -11,7 +11,7 @@ import SwiftUI
 struct SecretChatApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(connection: ConnectionViewModel())
         }
     }
 }
