@@ -10,15 +10,39 @@ import MultipeerConnectivity
 
 class ConnectionViewModel: NSObject, ObservableObject {
 
+//    enum AppState: String {
+//        case inactive = "Inactive"
+//        case searchingForChat = "Searching For Chat"
+//        case connectedToHost = "Connected To Host"
+//        case waitingForPeers = "Waiting for Peers"
+//        case hostingWithPeers = "Hosting Chat"
+//    }
+    
+//    @Published private(set) var appState = AppState.inactive
+    
+    enum AppState: String {
+//        case connected = "Connected"
+        case created = "Session created. Waiting for guests..."
+        case connected = "Connection established successfully"
+        case connecting =  "Connecting"
+        case notConnected = "Not Connected"
+        case disconnected = "Disconnected from session"
+        case unknown = "Unknown"
+    }
+    
+    @Published var appState = AppState.notConnected
+    
     var peerID: MCPeerID
     var mcSession: MCSession
     var hostID: MCPeerID?
 //    var mcAdvertiserAssitant: MCAdvertiserAssistant!
     var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser?
+    var browser: MCBrowserViewController
     
     override init() {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        browser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
         super.init()
         mcSession.delegate = self
     }
@@ -27,15 +51,26 @@ class ConnectionViewModel: NSObject, ObservableObject {
         mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "chatting")
         mcNearbyServiceAdvertiser?.delegate = self
         mcNearbyServiceAdvertiser?.startAdvertisingPeer()
+//        appState = .waitingForPeers
     }
     
     func invite() {
-        let browser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
+//        browser = MCBrowserViewController(serviceType: "chatting", session: mcSession)
         browser.delegate = self
         DispatchQueue.main.async {
             let screen = UIApplication.shared.keyWindow
-            screen?.rootViewController?.presentedViewController?.present(browser, animated: true, completion: nil)
+            screen?.rootViewController?.presentedViewController?.present(self.browser, animated: true, completion: nil)
         }
+    }
+    
+    func disconnect() {
+        mcNearbyServiceAdvertiser?.stopAdvertisingPeer()
+        browser.browser?.stopBrowsingForPeers()
+        mcSession.disconnect()
+        
+//        DispatchQueue.main.async {
+//            self.appState = .inactive
+//        }
     }
 }
 
@@ -53,13 +88,25 @@ extension ConnectionViewModel: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .connected:
-            print("\(peerID), state: connected")
+            DispatchQueue.main.async {
+                self.appState = .connected
+            }
+            print("\(peerID), state: \(appState)")
         case .connecting:
-            print("\(peerID), state: connecting")
+            DispatchQueue.main.async {
+                self.appState = .connecting
+            }
+            print("\(peerID), state: \(appState)")
         case .notConnected:
-            print("\(peerID), state: not connected")
+            DispatchQueue.main.async {
+                self.appState = .notConnected
+            }
+            print("\(peerID), state: \(appState)")
         default:
-            print("\(peerID), state: unknown")
+            DispatchQueue.main.async {
+                self.appState = .unknown
+            }
+            print("\(peerID), state: \(appState)")
         }
     }
     
@@ -83,6 +130,17 @@ extension ConnectionViewModel: MCSessionDelegate {
 extension ConnectionViewModel: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, mcSession)
+//        appState = .hostingWithPeers
+    }
+}
+
+extension ConnectionViewModel: MCNearbyServiceBrowserDelegate {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+//        appState = .connectedToHost
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        disconnect()
     }
 }
 

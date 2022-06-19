@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {    
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var connection: ConnectionViewModel
+    @State private var isShowingSnackbar = false
     
     var body: some View {
         ZStack {
@@ -43,26 +44,13 @@ struct SettingsView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding()
-                        Button {
+                        
+                        SettingsButton(title: "Generate new key pairs") {
                             
-                        } label: {
-                            Text("Generate new key pairs")
-                                .foregroundColor(.black)
-                                .font(.title3)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(UIColor.systemGray2))
                         }
                         
-                        Button {
+                        SettingsButton(title: "Generate new public keys for friends") {
                             
-                        } label: {
-                            Text("Generate new public keys for friends")
-                                .foregroundColor(.black)
-                                .font(.title3)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(UIColor.systemGray2))
                         }
                     }
                     
@@ -73,34 +61,52 @@ struct SettingsView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding()
-                        
-                        Button {
+                        SettingsButton(title: "Create Session") {
+                            connection.appState = .created
                             connection.advertise()
                             presentationMode.wrappedValue.dismiss()
-                            
-                        } label: {
-                            Text("Create Session")
-                                .foregroundColor(.black)
-                                .font(.title3)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(UIColor.systemGray2))
+                            withAnimation {
+                                isShowingSnackbar.toggle()
+                            }
                         }
                         
-                        Button {
-                            connection.invite()
-                        } label: {
-                            Text("Join Session")
-                                .foregroundColor(.black)
-                                .font(.title3)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(UIColor.systemGray2))
+                        SettingsButton(title: connection.appState == .notConnected ? "Join Session" : "Disconnect") {
+                            if connection.appState == .notConnected {
+                                connection.invite()
+                                if connection.appState == .connected {
+                                    withAnimation {
+                                        isShowingSnackbar.toggle()
+                                    }
+                                }
+                            } else if connection.appState == .connected {
+                                connection.appState = .disconnected
+                                connection.disconnect()
+                                presentationMode.wrappedValue.dismiss()
+                                withAnimation {
+                                    isShowingSnackbar.toggle()
+                                }
+                            }
                         }
                     }
                 }
             }
-            
+        }
+        Snackbar(isShowing: $isShowingSnackbar, message: connection.appState.rawValue)
+    }
+}
+
+struct SettingsButton: View {
+    var title: String
+    var clicked: (() -> Void)
+    
+    var body: some View {
+        Button(action: clicked) {
+            Text(title)
+                .foregroundColor(.black)
+                .font(.title3)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color(UIColor.systemGray2))
         }
     }
 }

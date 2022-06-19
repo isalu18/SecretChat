@@ -19,6 +19,7 @@
 		5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882573E282B4BA7006F22FD /* MessageBubble.swift */; };
 		58BEF82E28334AE000DA1564 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEF82D28334AE000DA1564 /* SettingsView.swift */; };
 		58BEF83028334AF600DA1564 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BEF82F28334AF600DA1564 /* TitleView.swift */; };
+		58C3A71B285EBE26009612F3 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3A71A285EBE26009612F3 /* Snackbar.swift */; };
 		58CD1237282DF6570097504C /* MessageFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CD1236282DF6570097504C /* MessageFieldView.swift */; };
 		58F1FADE2835E90B009E7AA5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1FADD2835E90B009E7AA5 /* Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		5882573E282B4BA7006F22FD /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
 		58BEF82D28334AE000DA1564 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		58BEF82F28334AF600DA1564 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		58C3A71A285EBE26009612F3 /* Snackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snackbar.swift; sourceTree = "<group>"; };
 		58CD1236282DF6570097504C /* MessageFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFieldView.swift; sourceTree = "<group>"; };
 		58F1FADD2835E90B009E7AA5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +162,7 @@
 				58CD1236282DF6570097504C /* MessageFieldView.swift */,
 				58BEF82D28334AE000DA1564 /* SettingsView.swift */,
 				58BEF82F28334AF600DA1564 /* TitleView.swift */,
+				58C3A71A285EBE26009612F3 /* Snackbar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				58F1FADE2835E90B009E7AA5 /* Extensions.swift in Sources */,
 				58BEF83028334AF600DA1564 /* TitleView.swift in Sources */,
 				58BEF82E28334AE000DA1564 /* SettingsView.swift in Sources */,
+				58C3A71B285EBE26009612F3 /* Snackbar.swift in Sources */,
 				5882570F282B426E006F22FD /* SecretChatApp.swift in Sources */,
 				5849D13F28485CF400940596 /* ConnectionViewModel.swift in Sources */,
 				5882573F282B4BA7006F22FD /* MessageBubble.swift in Sources */,

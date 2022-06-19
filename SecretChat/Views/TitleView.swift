@@ -27,7 +27,7 @@ struct TitleView: View {
                     Text("online")
                         .foregroundColor(.secondary)
                         .font(.caption)
-                    Text(isSafeMode ? "Safe Mode" : "Unsafe Mode")
+                    Text(isSafeMode ? "Safe Mode" : "Normal Mode")
                         .foregroundColor(isSafeMode ? .indigo : .red)
                         .font(.caption)
                         .fontWeight(.bold)
